@@ -16,9 +16,11 @@
       "required": true
     },
     "cover": {
-      "allowedTypes": ["images"],
+      "allowedTypes": [
+        "images"
+      ],
       "type": "media",
-      "multiple": false,
+      "multiple": true,
       "required": true
     },
     "content": {
