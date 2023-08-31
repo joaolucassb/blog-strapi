@@ -16,7 +16,8 @@ module.exports = createCoreController('api::post.post', {
     const { slug } = ctx.params;
 
     const response  = await strapi.db.query('api::post.post').findOne({
-      where: {slug}
+      where: {slug},
+      populate: ['cover', 'author', 'category']
     })
 
     return response;
