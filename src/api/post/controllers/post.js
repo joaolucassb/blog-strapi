@@ -13,8 +13,8 @@ module.exports = createCoreController('api::post.post', {
   },
 
   async find(ctx) {
-    var { query } = ctx.request
-    return strapi.query('api::post.post').find({
+    var { query } = ctx.request;
+    const response = await strapi.db.query('api::post.post').findMany({
       where: query,
       populate: [
         'cover',
@@ -22,6 +22,7 @@ module.exports = createCoreController('api::post.post', {
         'category',
       ],
     });
+    return response;
   },
 
   async findOne(ctx) {
