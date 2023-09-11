@@ -1,4 +1,3 @@
-// @ts-nocheck
 "use strict";
 
 /**
@@ -6,6 +5,7 @@
  */
 
 const { createCoreController } = require("@strapi/strapi").factories;
+const { sanitize } = require('@strapi/utils');
 
 module.exports = createCoreController("api::post.post", ({ strapi }) => ({
   async findOne(ctx) {
@@ -16,11 +16,11 @@ module.exports = createCoreController("api::post.post", ({ strapi }) => ({
       ...ctx.query,
     };
 
-    const post = await strapi.entityService.findMany("api::post.post", query);
+    const entity = await strapi.entityService.findMany("api::post.post", query);
 
-    const sanitizedEntity = await this.sanitizeOutput(post);
+    const sanitizedEntity = await sanitize.contentAPI.output(entity, ctx);
 
-    return this.transformResponse(sanitizedEntity[0]);
+    return sanitizedEntity;
   },
 }));
 
