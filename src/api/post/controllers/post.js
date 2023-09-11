@@ -17,7 +17,11 @@ module.exports = createCoreController('api::post.post', {
 
     const response  = await strapi.db.query('api::post.post').findOne({
       where: {slug},
-      populate: ['cover', 'author', 'category']
+        populate: [
+          'cover',
+          'author',
+          'category',
+        ],
     })
 
     return response;
