@@ -12,6 +12,18 @@ module.exports = createCoreController('api::post.post', {
     return strapi.query('api::post.post').count({ where: query});
   },
 
+  async find(ctx) {
+    var { query } = ctx.request
+    return strapi.query('api::post.post').find({
+      where: query,
+      populate: [
+        'cover',
+        'author',
+        'category',
+      ],
+    });
+  },
+
   async findOne(ctx) {
     const { slug } = ctx.params;
 
