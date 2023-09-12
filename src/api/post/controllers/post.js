@@ -6,23 +6,6 @@
 
 
 const { createCoreController } = require('@strapi/strapi').factories;
-const utils = require("@strapi/utils");
-
-module.exports = createCoreController('api::post.post', ({ strapi }) => ({
-  async findBySlug(ctx) {
-    const { slug } = ctx.params;
-
-    const query = {
-      filters: { slug },
-      ...ctx.query,
-    };
-
-    const entity = await strapi.service('api::post.post').find(query);
-    const sanitizedEntity = await utils.sanitize.contentAPI.output(entity, ctx);
-    return sanitizedEntity;
-
-  },
-}));
 
 module.exports = createCoreController('api::post.post', {
   count(ctx) {
